@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siti Dede Fahriza - Professional Portfolio & CV</title>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-grad: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            --accent-color: #3b82f6;
+            --accent-grad: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            --bg-light: #f8fafc;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Layout Grid Utama */
+        .main-wrapper {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 40px;
+        }
+
+        /* ====== SIDEBAR PROFIL KEKINIAN ====== */
+        .profile-sidebar {
+            background: white;
+            border-radius: 24px;
+            padding: 40px 30px;
+            box-shadow: var(--card-shadow);
+            position: sticky;
+            top: 40px;
+            height: fit-content;
+            text-align: center;
+        }
+
+        .avatar-container {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 25px;
+            position: relative;
+        }
+
+        .avatar-container img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #f1f5f9;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .profile-sidebar h1 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .badge-tag {
+            display: inline-block;
+            background: #eff6ff;
+            color: var(--accent-color);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+
+        .contact-widget {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .contact-item:last-child { margin-bottom: 0; }
+
+        .contact-item i {
+            width: 32px;
+            height: 32px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-color);
+            margin-right: 12px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .social-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #f1f5f9;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--accent-grad);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* ====== MAIN CONTENT AREA ====== */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navigation Tabs Header */
+        .navigation-bar {
+            background: white;
+            border-radius: 20px;
+            padding: 10px;
+            display: flex;
+            gap: 10px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 30px;
+        }
+
+        .nav-btn {
+            flex: 1;
+            padding: 14px 24px;
+            border: none;
+            background: transparent;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .nav-btn.active {
+            background: var(--primary-grad);
+            color: white;
+        }
+
+        /* Sections */
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .content-section.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-block {
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 30px;
+        }
+
+        h2.block-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            position: relative;
+            padding-left: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2.block-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 5px;
+            height: 24px;
+            background: var(--accent-grad);
+            border-radius: 10px;
+        }
+
+        p.intro-text {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        /* ====== VARIASI KARTU MODERN ====== */
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .work-card {
+            border: 1px solid #f1f5f9;
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01);
+        }
+
+        .work-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: transparent;
+            transition: background 0.3s;
+        }
+
+        .work-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+            border-color: #e2e8f0;
+        }
+
+        .work-card:hover::after {
+            background: var(--accent-grad);
+        }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .work-card h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .work-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .action-link {
+            align-self: flex-start;
+            background: #f1f5f9;
+            color: var(--text-main);
+            padding: 10px 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .work-card:hover .action-link {
+            background: var(--accent-grad);
+            color: white;
+        }
+
+        /* ====== CV COMPONENTS ====== */
+        .timeline {
+            position: relative;
+            padding-left: 20px;
+            border-left: 2px solid #e2e8f0;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item:last-child { margin-bottom: 0; }
+
+        .timeline-dot {
+            position: absolute;
+            left: -27px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #dbeafe;
+        }
+
+        .timeline-date {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 5px;
+        }
+
+        .timeline-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .timeline-institution {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+
+        /* Grid Skills Matrix */
+        .skills-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-box {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid #f1f5f9;
+        }
+
+        .skill-box h5 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background: white;
+            border: 1px solid #e2e8f0;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Responsive Layout */
+        @media (max-width: 992px) {
+            .main-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .profile-sidebar {
+                position: relative;
+                top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-wrapper">
+        
+        <!-- SIDEBAR PROFIL KEKINIAN -->
+        <aside class="profile-sidebar">
+            <div class="avatar-container">
+                <!-- GANTI LINK DI BAWAH INI DENGAN LINK FOTOMU -->
+                <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=400" alt="Siti Dede Fahriza">
+            </div>
+            <h1>Siti Dede Fahriza</h1>
+            <span class="badge-tag">English Literature Student</span>
+            
+            <div class="contact-widget">
+                <div class="contact-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>rizasukasejarah@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>+62 895-3092-8340</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>BSD, South Tangerang</span>
+                </div>
+            </div>
+
+            <div class="social-links">
+                <a href="https://youtube.com/@studywithriza" target="_blank" class="social-icon"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://www.instagram.com/p/DYBrHflkwyZ/" target="_blank" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </aside>
+
+        <!-- MAIN INTERACTIVE CONTENT AREA -->
+        <main class="main-content">
+            
+            <!-- Tab Navigation Header -->
+            <nav class="navigation-bar">
+                <button class="nav-btn active" onclick="switchTab('portfolio')" id="btn-portfolio">
+                    <i class="fa-solid fa-briefcase"></i> Digital Portfolio (Part B)
+                </button>
+                <button class="nav-btn" onclick="switchTab('cv')" id="btn-cv">
+                    <i class="fa-solid fa-file-invoice"></i> Curriculum Vitae (Part A)
+                </button>
+            </nav>
+
+            <!-- PORTFOLIO SUB-PAGE -->
+            <div id="portfolio" class="content-section active">
+                
+                <div class="section-block">
+                    <h2 class="block-title"><i class="fa-solid fa-user-astronaut"></i> Introduction</h2>
+                    <p class="intro-text">Welcome to my Digital Portfolio. I am an English Literature undergraduate student at Universitas Pamulang with a strong passion for digital media production, linguistic-literary analysis, theater performance, and creative storytelling. Balancing academic excellence with professional professional roles, I merge linguistic insights with digital communication tactics.</p>
+                    <p class="intro-text"><strong>Career Goals:</strong> To excel as a Digital Content Specialist, Creative Director, Communications Professional, or Content Writer where I can utilize my writing dexterity, performance experience, and sharp analytical skills to drive audience engagement.</p>
+                </div>
+
+                <div class="section-block">
+                    <h2 class="block-title"><i class="fa-solid fa-layer-group"></i> Showcase of Works</h2>
+                    <div class="showcase-grid">
+                        
+                        <div class="work-card">
+                            <div>
+                                <div class="card-meta"><i class="fa-brands fa-instagram"></i> Social Media Campaign</div>
+                                <h4>Instagram Carousel Post</h4>
+                                <p>An aesthetic and educational Instagram post focused on contemporary literary expressions tailored for modern digital audiences.</p>
+                            </div>
+                            <a href="https://www.instagram.com/p/DYBrHflkwyZ/" target="_blank" class="action-link">View Carousel Post <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+
+                        <div class="work-card">
+                            <div>
+                                <div class="card-meta"><i class="fa-brands fa-youtube"></i> Education Media</div>
+                                <h4>YouTube Channel (@studywithriza)</h4>
+                                <p>An ongoing digital platform focusing on college life hacks, language learning tips, and academic storytelling strategies.</p>
+                            </div>
+                            <a href="https://youtube.com/@studywithriza" target="_blank" class="action-link">Visit Channel <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+
+                        <div class="work-card">
+                            <div>
+                                <div class="card-meta"><i class="fa-solid fa-clapperboard"></i> Performing Arts</div>
+                                <h4>Psychological Drama Short Film</h4>
+                                <p>Starred as the main protagonist, <strong>Jasmine</strong>, in an English Psychological Drama project showcasing advanced public speaking and deep character immersion.</p>
+                            </div>
+                            <a href="https://youtu.be/S4dtBRTUpj0" target="_blank" class="action-link">Watch Performance <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+
+                        <div class="work-card">
+                            <div>
+                                <div class="card-meta"><i class="fa-solid fa-graduation-cap"></i> Academic Publication</div>
+                                <h4>Research Paper on JISMA Journal</h4>
+                                <p>Scholarly work detailing intensive literary analysis and multidisciplinary scientific concepts.</p>
+                            </div>
+                            <a href="https://jisma.org/index.php/jisma/article/view/1226" target="_blank" class="action-link">Read Paper <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+
+                        <div class="work-card">
+                            <div>
+                                <div class="card-meta"><i class="fa-solid fa-book-bookmark"></i> Indexed Research</div>
+                                <h4>Garuda Journal Portal Article</h4>
+                                <p>Indexed academic research representing robust argumentation structure and contextual textual analysis competency.</p>
+                            </div>
+                            <a href="https://garuda.kemdiktisaintek.go.id/journal/view/24643?page=24" target="_blank" class="action-link">View Indexed Article <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+
+                        <div class="work-card">
+                            <div>
+                                <div class="card-meta"><i class="fa-solid fa-microphone"></i> Audio Storytelling</div>
+                                <h4>Podcast Publication Episode</h4>
+                                <p>A structured audio production showcasing vocal articulation skills, script preparation, and audio engineering workflows.</p>
+                            </div>
+                            <a href="https://youtu.be/slhAgoU0ABY" target="_blank" class="action-link">Listen to Podcast <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- CV SUB-PAGE -->
+            <div id="cv" class="content-section">
+                
+                <div class="section-block">
+                    <h2 class="block-title"><i class="fa-solid fa-graduation-cap"></i> Education</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date">March 2023 - Present</div>
+                            <div class="timeline-title">Bachelor of English Literature</div>
+                            <div class="timeline-institution">Universitas Pamulang, South Tangerang — Current IPK: 3.55</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h2 class="block-title"><i class="fa-solid fa-sliders"></i> Skill Matrix</h2>
+                    <div class="skills-matrix">
+                        <div class="skill-box">
+                            <h5><i class="fa-solid fa-wand-magic-sparkles"></i> Creative Media</h5>
+                            <div class="skill-tags">
+                                <span class="tag">SEO Writing</span>
+                                <span class="tag">Drama Performance</span>
+                                <span class="tag">Script Interpretation</span>
+                                <span class="tag">Podcast Production</span>
+                            </div>
+                        </div>
+                        <div class="skill-box">
+                            <h5><i class="fa-solid fa-laptop-code"></i> Professional Hard Skills</h5>
+                            <div class="skill-tags">
+                                <span class="tag">MS Office Suite</span>
+                                <span class="tag">Export Logistics</span>
+                                <span class="tag">E-commerce Systems</span>
+                                <span class="tag">Audio/Video Editing</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h2 class="block-title"><i class="fa-solid fa-business-time"></i> Professional Experience</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date">2024 - Present</div>
+                            <div class="timeline-title">Independent Digital Creator & Performer</div>
+                            <div class="timeline-institution">Digital Portfolio Projects</div>
+                            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 5px;">Starred as lead character Jasmine in Psychological Drama, managed educational digital channels, and handled published online journals.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date">Nov 2023 - Present</div>
+                            <div class="timeline-title">Staff Document Export</div>
+                            <div class="timeline-institution">PT. Sadewa Express Logistics — BSD City</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date">Jul 2022 - Jan 2023</div>
+                            <div class="timeline-title">Admin Online Store</div>
+                            <div class="timeline-institution">Distributor SR12 Tangerang</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h2 class="block-title"><i class="fa-solid fa-trophy"></i> Awards & Certifications</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date">Dec 2024</div>
+                            <div class="timeline-title">Best Writer Award</div>
+                            <div class="timeline-institution">National Poetry Competition (CV. Simpel Publisher)</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date">Dec 2024</div>
+                            <div class="timeline-title">Published Co-Author</div>
+                            <div class="timeline-institution">Mini Fiction Anthology Book "LDR"</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function switchTab(tabName) {
+            document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            
+            if(tabName === 'portfolio') {
+                document.getElementById('portfolio').classList.add('active');
+                document.getElementById('btn-portfolio').classList.add('active');
+            } else {
+                document.getElementById('cv').classList.add('active');
+                document.getElementById('btn-cv').classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
